@@ -1,0 +1,1033 @@
+/* --- PARTE 1: Configuração Inicial e Cabeçalho --- */
+
+/* 1. Importação de Fontes e Variáveis Globais */
+/* Usar variáveis torna a customização de cores e fontes muito mais fácil no futuro! */
+@import url('https://fonts.googleapis.com/css2?family=Fondamento&family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+    --cor-fundo-pagina: #f0e6d2; /* Um tom de pergaminho */
+    --cor-fundo-ficha: #ffffff;
+    --cor-borda: #8b7d6b;      /* Um marrom acinzentado, como tinta antiga */
+    --cor-texto-principal: #3a3a3a;
+    --cor-texto-label: #555555;
+    --cor-destaque: #a52a2a;     /* Vermelho queimado para foco */
+    --fonte-titulo: 'Fondamento', cursive;
+    --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+/* 2. Estilos Base da Página */
+/* Reset básico e configuração do corpo da página */
+body {
+    margin: 0; /* Reset da margem */
+    padding: 20px;
+    font-family: var(--fonte-corpo);
+    background-color: var(--cor-fundo-pagina);
+    color: var(--cor-texto-principal);
+    font-size: 14px;
+}
+
+/* Garante que o padding e a borda não aumentem o tamanho final dos elementos */
+* {
+    box-sizing: border-box;
+}
+
+/* Oculta as setas dos campos de número para um visual mais limpo */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Para Chrome, Safari, Edge, Opera */
+  appearance: none;         /* Propriedade padrão */
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* Hack específico para Firefox */
+  appearance: none;           /* Propriedade padrão para consistência */
+}
+
+/* Classe utilitária para esconder elementos com JS */
+.hidden {
+    display: none !important;
+}
+
+/* Contêiner para as animações de fundo */
+#animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Garante que fique atrás de todo o conteúdo */
+    pointer-events: none; /* Impede que o contêiner bloqueie cliques */
+}
+
+/* Novo Seletor de Tema */
+.theme-selector {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.theme-selector span {
+    font-family: var(--fonte-titulo);
+    font-weight: bold;
+}
+#class-selection-grid {
+    display: flex;
+    gap: 10px;
+}
+.class-icon-button {
+    cursor: pointer;
+}
+
+/* 3. Estrutura Principal da Ficha */
+.character-sheet {
+    max-width: 900px;
+    margin: auto; /* Centraliza a ficha na página */
+    background-color: var(--cor-fundo-ficha);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+}
+
+/* 4. Seção do Cabeçalho */
+.sheet-header {
+    padding: 20px;
+    border-bottom: 2px solid var(--cor-borda);
+}
+
+.header-row {
+    display: flex;         /* Alinha os itens em uma linha */
+    flex-wrap: wrap;       /* Permite que os itens quebrem para a linha de baixo */
+    gap: 20px;             /* Espaço entre os campos */
+    align-items: flex-end; /* Alinha os campos pela base */
+}
+
+/* Adiciona um espaço extra abaixo da primeira linha do cabeçalho (Nome e Classe) */
+.header-row.header-name-class {
+    margin-bottom: 25px;
+}
+
+/* 5. Estilo dos Campos de Input e Labels no Cabeçalho */
+
+/* Contêiner para cada par de input + label */
+.input-group {
+    position: relative;     /* Essencial para que a label seja posicionada em relação a este contêiner */
+    flex: 1 1 120px;        /* Flex: cresce, encolhe, com base de 120px */
+    padding-bottom: 20px;   /* Deixa espaço para a label abaixo */
+}
+
+.class-level-group {
+    display: flex;
+    align-items: baseline;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.class-level-group input {
+    border: none !important;
+    padding: 5px 2px;
+    background: transparent;
+}
+
+.class-level-group input#class-name {
+    flex-grow: 1;
+    font-weight: bold;
+}
+.class-level-group input#character-level {
+    width: 40px;
+    text-align: center;
+}
+
+.input-group input:not(#class-name):not(#character-level) {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--cor-borda);
+    background: transparent;
+    font-size: 1em;
+    padding: 5px 2px;
+    text-align: center;
+}
+
+/* Remove a borda de foco padrão e adiciona uma customizada */
+.input-group input:focus {
+    outline: none;    
+    border-bottom-color: var(--cor-destaque);
+}
+
+/* A "mágica" para a label ficar abaixo da linha */
+.input-group label {
+    position: absolute;          /* Tira a label do fluxo normal do documento */
+    bottom: 0;                   /* Posiciona na base do .input-group */
+    left: 50%;                   /* Começa no meio do .input-group */
+    transform: translateX(-50%); /* Centraliza a label perfeitamente no eixo X */
+
+    font-family: var(--fonte-titulo);
+    font-size: 0.8em;
+    color: var(--cor-texto-label);
+    text-transform: uppercase;
+    white-space: nowrap;         /* Impede que a label quebre em duas linhas */
+}
+
+/* Estilos especiais para o nome do personagem */
+.input-group.large-text {
+    flex-grow: 2; /* Faz o campo de nome ocupar mais espaço */
+}
+
+.input-group.large-text input {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: left;
+    font-family: var(--fonte-titulo);
+}
+
+.input-group.large-text label {
+    left: 0;                 /* Alinha a label à esquerda */
+    transform: translateX(0);/* Remove a centralização */
+}
+
+/* 6. Preparação para o Conteúdo Principal (Grid) */
+/* 7. Layout das Colunas */
+.sheet-main-content {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    grid-template-columns: 0.8fr 1fr 1fr; /* Coluna esquerda (0.8), meio (1), direita (1) */
+}
+
+/* 8. Estilo Geral dos Blocos */
+/* Um estilo base para todas as "caixas" de conteúdo */
+.left-column > *,
+.middle-column > *,
+.right-column > * {
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fdfaf5; /* Um branco levemente amarelado */
+}
+
+/* Organiza os blocos dentro de cada coluna com espaçamento uniforme */
+.left-column,
+.middle-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título para cada bloco (Atributos, Perícias, etc.) */
+h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-family: var(--fonte-titulo);
+    font-size: 1.1em;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+    color: var(--cor-destaque);
+}
+
+/* 9. Inspiração e Bônus de Proficiência */
+.inspiration-prof-box {
+    display: flex;
+    gap: 15px;
+}
+
+.inspiration-box, .proficiency-bonus-box {
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Empilha o input e a label */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+}
+
+.inspiration-box input[type="checkbox"] {
+    /* Estilo para o checkbox de inspiração */
+    width: 25px;
+    height: 25px;
+    appearance: none; /* Remove o estilo padrão do navegador */
+    border: 2px solid var(--cor-borda);
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+}
+.inspiration-box input:checked {
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+}
+.inspiration-box span {
+    font-family: var(--fonte-titulo);
+}
+
+.proficiency-bonus-box input {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    width: 50px;
+    border: none;
+    background: transparent;
+}
+.proficiency-bonus-box label {
+    font-family: var(--fonte-titulo);
+    font-size: 0.9em;
+}
+
+/* 10. Bloco de Atributos */
+.abilities-scores-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Uma coluna para os atributos */
+    gap: 10px;
+}
+
+.ability-score-group {
+    border: 2px solid var(--cor-borda);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 5px;
+    background-color: var(--cor-fundo-ficha);
+    position: relative; /* Para posicionar o nome do atributo */
+}
+
+.ability-score-name {
+    font-weight: bold;
+    font-size: 0.8em;
+    background-color: var(--cor-fundo-ficha);
+    padding: 0 5px;
+    position: absolute;
+    top: -10px; /* Puxa o nome para cima, sobre a borda */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.ability-score-input {
+    font-size: 2.2em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.ability-modifier-box {
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    width: 50px;
+    height: 35px;
+    margin: 5px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+/* 11. Listas de Testes de Resistência e Perícias */
+.saving-throws-list, .skills-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.saving-throws-list li, .skills-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 2px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.saving-throws-list li:last-child, .skills-list li:last-child {
+    border-bottom: none;
+}
+
+.proficiency-checkbox {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--cor-texto-principal);
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0; /* Impede que o círculo encolha */
+}
+.proficiency-checkbox:checked {
+    background-color: var(--cor-texto-principal);
+}
+
+.save-value, .skill-value {
+    width: 35px;
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+}
+
+.skill-ability {
+    color: var(--cor-texto-label);
+    font-size: 0.9em;
+    margin-left: auto; /* Empurra o "(Des)", "(For)", etc. para a direita */
+}
+
+/* 12. Outros Blocos da Coluna Esquerda */
+.passive-perception-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.passive-perception-box input {
+    width: 40px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid var(--cor-borda);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 4px;
+    padding: 8px;
+    resize: vertical;
+    font-family: var(--fonte-corpo);
+    font-size: 1em;
+    background-color: #fdfaf5;
+}
+
+/* --- PARTE 3: Coluna do Meio --- */
+
+/* 13. Estatísticas de Combate (CA, Iniciativa, Deslocamento) */
+.combat-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: var(--cor-fundo-ficha);
+}
+
+.stat-box input {
+    font-size: 2.5em;
+    width: 80px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    font-family: var(--fonte-corpo);
+    padding: 5px 0;
+}
+
+.stat-box label {
+    display: block;
+    margin-top: -5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--fonte-titulo);
+}
+
+/* 14. Bloco de Pontos de Vida */
+.hit-points-block {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: var(--cor-fundo-ficha);
+}
+
+.hp-max-box {
+    font-size: 0.8em;
+    color: var(--cor-texto-label);
+    margin-bottom: 10px;
+}
+.hp-max-box input {
+    width: 50px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hp-current-box input {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 5px;
+    border: none;
+    width: 100%;
+    font-weight: bold;
+}
+.hp-current-box label, .hp-temp-box label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--fonte-titulo);
+    font-size: 0.9em;
+}
+
+.hp-temp-box {
+    margin-top: 10px;
+}
+.hp-temp-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    padding: 5px 0;
+}
+
+/* 15. Dados de Vida e Testes Contra a Morte */
+.hit-dice-block, .death-saves-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: var(--cor-fundo-ficha);
+}
+
+.hit-dice-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+}
+.hit-dice-total input {
+    width: 60px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+.hit-dice-block > input { /* O input de DV restantes */
+    text-align: center;
+    font-size: 1.2em;
+    border: none;
+}
+
+.death-saves-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkbox-group {
+    display: flex;
+    gap: 5px;
+}
+.checkbox-group input[type="checkbox"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--cor-texto-principal);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.checkbox-group input:checked {
+    background-color: var(--cor-texto-principal);
+}
+
+/* 16. Bloco de Ataques */
+.attacks-spellcasting-block {
+    /* O contêiner principal não precisa mais ser um grid aqui */
+}
+
+.attacks-table {
+    width: 100%;
+    border-collapse: collapse; /* Une as bordas das células */
+    margin-bottom: 10px;
+}
+
+.attacks-table th {
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+    color: var(--cor-texto-label);
+    border-bottom: 1px solid #ccc;
+    padding: 8px 5px;
+}
+
+.attacks-table td {
+    padding: 4px 2px; /* Espaçamento vertical e horizontal */
+}
+
+.attacks-table input {
+    width: 100%;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.attacks-table td:first-child input { /* Alinha o texto do input na primeira coluna (Nome) à esquerda */
+    text-align: left;
+}
+
+.attacks-spellcasting-block textarea {
+    margin-top: 10px;
+    min-height: 80px;
+}
+
+/* --- PARTE 4: Coluna da Direita --- */
+
+/* 17. Estilo para as Caixas de Texto da Personalidade */
+/* Ajustando a altura mínima para os campos de texto menores */
+.personality-block textarea,
+.ideals-block textarea,
+.bonds-block textarea,
+.flaws-block textarea {
+    min-height: 80px;
+}
+
+/* A caixa de Características e Traços pode ser maior */
+.features-traits-block textarea {
+    min-height: 150px;
+}
+
+/* 19. Bloco de Magias (Spellcasting) */
+.spellcasting-block {
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fdfaf5;
+}
+
+.spell-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.spell-stat {
+    background-color: var(--cor-fundo-ficha);
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 10px 5px;
+}
+
+.spell-stat input {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    background: transparent;
+    width: 100%;
+}
+
+.spell-stat label {
+    font-family: var(--fonte-titulo);
+    font-size: 0.8em;
+    color: var(--cor-texto-label);
+}
+
+.spellbook-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.spell-level-section h4 {
+    font-family: var(--fonte-titulo);
+    margin: 0 0 8px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    color: var(--cor-texto-principal);
+}
+
+.spell-level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.spell-slots-tracker {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+}
+.spell-slots-tracker input {
+    width: 35px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.spell-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.spell-list li {
+    padding: 4px 0;
+    border-bottom: 1px dotted #e0e0e0;
+}
+.remove-spell-btn {
+    color: var(--cor-destaque);
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+}
+
+/* 18. Bloco do Retrato do Personagem */
+.character-portrait-block {
+    padding: 10px;
+}
+
+.character-portrait-block img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do contêiner */
+    height: 250px; /* Altura fixa para consistência */
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    cursor: pointer; /* Indica que a imagem é clicável */
+    transition: filter 0.2s ease-in-out;
+}
+.character-portrait-block img:hover {
+    filter: brightness(1.1);
+}
+
+/* Esconde o input de arquivo padrão */
+#portrait-upload {
+    display: none;
+}
+
+/* Estilos para o buscador de magias via API */
+.api-search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.api-search-box input {
+    flex-grow: 1;
+    border: 1px solid var(--cor-borda);
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #fdfaf5;
+    font-family: var(--fonte-corpo);
+}
+
+.api-search-box button {
+    padding: 8px 15px;
+    border: 1px solid var(--cor-destaque);
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo-ficha);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.api-search-box button:hover {
+    background-color: #c13131; /* Um vermelho um pouco mais escuro */
+}
+.api-search-box button:active {
+    transform: scale(0.98);
+}
+.api-search-box button:disabled {
+    background-color: #999;
+    border-color: #999;
+    cursor: not-allowed;
+}
+
+/* --- Estilos do Modal (Pop-up) --- */
+.modal-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fica fixo na tela, mesmo com scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+    z-index: 1000; /* Garante que fique sobre todo o conteúdo */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-overlay.visible {
+    display: flex; /* Mostra o modal quando a classe .visible é adicionada */
+}
+
+.modal-content {
+    background-color: var(--cor-fundo-ficha);
+    padding: 25px 30px;
+    border-radius: 8px;
+    border: 2px solid var(--cor-borda);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh; /* Altura máxima de 85% da tela */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
+    position: relative;
+    font-family: var(--fonte-corpo);
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--cor-texto-label);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-close-button:hover {
+    color: var(--cor-destaque);
+}
+
+/* Estilo para o botão de adicionar ao grimório no modal */
+.modal-add-button {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #28a745; /* Verde sucesso */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+/* Estilos para o conteúdo dentro do modal */
+#spell-modal-body h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin-top: 0;
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 10px;
+}
+
+#spell-modal-body p {
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+#spell-modal-body strong {
+    color: var(--cor-texto-principal);
+}
+
+.class-icon-button img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    transition: transform 0.2s, filter 0.2s;
+    filter: grayscale(50%);
+}
+.class-icon-button:hover img {
+    transform: scale(1.1);
+}
+.class-icon-button.active img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--cor-destaque);
+}
+
+/* ================================================= */
+/* === MOTOR DE TEMAS ============================== */
+/* ================================================= */
+
+/* --- TEMA: MAGO (WIZARD) --- */
+@keyframes float-runes {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+body.theme-wizard {
+    background-color: #0c1428;
+    background-image: url('https://i.imgur.com/aT3s2tG.jpg'); /* Imagem de um caldeirão/laboratório desfocado */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Estilo para cada "córrego" de runas gerado pelo JS */
+.rune-stream {
+    position: absolute;
+    top: 100%; /* Começa fora da tela, na parte de baixo */
+    color: rgba(0, 191, 255, 0.5);
+    animation: float-runes 15s linear infinite;
+    /* Efeito NEON com múltiplas camadas de sombra */
+    text-shadow: 
+        0 0 5px rgba(0, 191, 255, 0.8),
+        0 0 15px rgba(0, 191, 255, 0.6),
+        0 0 30px rgba(0, 191, 255, 0.4);
+}
+
+body.theme-wizard .character-sheet {
+    /* background-image: url('https://i.imgur.com/p7kYpUa.jpg'); */ /* Textura desativada temporariamente */
+    border-color: #4a5d8b;
+    background-color: #1e2a40; /* Fundo da ficha mais escuro */
+    color: #e0e5f0; /* Texto mais claro para contraste */
+}
+
+/* --- Sobrescrita de componentes para o tema de Mago --- */
+body.theme-wizard .left-column > *,
+body.theme-wizard .middle-column > *,
+body.theme-wizard .right-column > * {
+    background-color: #2a3950; /* Um azul-acinzentado para as caixas */
+    border-color: #4a5d8b;
+}
+
+body.theme-wizard input:not([type="checkbox"]),
+body.theme-wizard textarea {
+    background-color: #1a2433; /* Fundo bem escuro para inputs */
+    color: #e0e5f0;
+    border-color: #4a5d8b;
+}
+
+body.theme-wizard h3 { color: #61dafb; } /* Um ciano brilhante para títulos */
+body.theme-wizard .ability-score-name { background-color: #2a3950; color: #61dafb; }
+body.theme-wizard .proficiency-checkbox:checked { background-color: #e0e5f0; }
+/* Corrige a cor de labels específicas que não herdam a cor principal */
+body.theme-wizard .input-group label,
+body.theme-wizard .stat-box label,
+body.theme-wizard .hp-max-box,
+body.theme-wizard .hp-current-box label,
+body.theme-wizard .hp-temp-box label,
+body.theme-wizard .attacks-table th {
+    color: #a8b2c5; /* Um cinza-azulado claro para boa legibilidade */
+}
+
+/* --- TEMA: GUERREIRO (WARRIOR) --- */
+body.theme-warrior {
+    background-color: #2d2d2d; /* Fundo cinza escuro */
+}
+
+@keyframes rise-spark {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-100vh) scale(0.5);
+    }
+}
+
+@keyframes rise-smoke {
+    from {
+        opacity: 0;
+        transform: translateY(0) scale(0.8);
+    }
+    50% {
+        opacity: 0.35; /* Aumenta a opacidade máxima da fumaça */
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-100vh) scale(2);
+    }
+}
+
+.spark, .smoke-puff {
+    position: absolute;
+    bottom: -50px; /* Começam fora da tela */
+}
+
+
+body.theme-warrior .character-sheet {
+    border-color: #ff4500; /* Laranja-vermelho como brasa */
+    background-color: #4a4a4a;
+    color: #f0f0f0;
+}
+
+/* --- Sobrescrita de componentes para o tema de Guerreiro --- */
+body.theme-warrior .left-column > *,
+body.theme-warrior .middle-column > *,
+body.theme-warrior .right-column > * {
+    background-color: #5e5e5e;
+    border-color: #ff4500;
+}
+
+body.theme-warrior input:not([type="checkbox"]),
+body.theme-warrior textarea {
+    background-color: #3c3c3c;
+    color: #f0f0f0;
+    border-color: #ff4500;
+}
+body.theme-warrior h3 { color: #ff8c00; } /* Laranja escuro para títulos */
+body.theme-warrior .ability-score-name { background-color: #5e5e5e; color: #ff8c00; }
+body.theme-warrior .proficiency-checkbox:checked { background-color: #f0f0f0; }
+/* Corrige a cor de labels específicas que não herdam a cor principal */
+body.theme-warrior .input-group label,
+body.theme-warrior .stat-box label,
+body.theme-warrior .hp-max-box,
+body.theme-warrior .hp-current-box label,
+body.theme-warrior .hp-temp-box label,
+body.theme-warrior .attacks-table th {
+    color: #cccccc; /* Um cinza claro para boa legibilidade */
+}
+
+/* --- TEMA: BARDO (BARD) --- */
+@keyframes float-notes {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    100% { transform: translate(50px, -100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Nova paleta para o Bardo */
+body.theme-bard {
+    background-color: #2e1a47; /* Roxo bem escuro */
+    background-image: none; /* Remove a imagem de taverna por enquanto */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Estilo para cada nota musical gerada pelo JS */
+.note-stream {
+    position: absolute;
+    top: 100%; /* Começa fora da tela, na parte de baixo */
+    color: rgba(221, 160, 221, 0.7); /* Lilás (Plum) */
+    animation: float-notes 12s linear infinite 2s;
+    text-shadow: 
+        0 0 5px rgba(255, 105, 180, 0.5), /* Rosa (HotPink) */
+        0 0 10px rgba(147, 112, 219, 0.4); /* Roxo (MediumPurple) */
+}
+
+body.theme-bard .character-sheet {
+    background-color: #483d8b; /* Azul ardósia escuro (DarkSlateBlue) */
+    border-color: #dda0dd; /* Lilás (Plum) */
+    color: #e6e6fa; /* Lavanda */
+}
+
+/* --- Sobrescrita de componentes para o tema de Bardo --- */
+body.theme-bard .left-column > *,
+body.theme-bard .middle-column > *,
+body.theme-bard .right-column > * {
+    background-color: #5a4a9f; /* Roxo médio para as caixas */
+    border-color: #dda0dd;
+}
+
+body.theme-bard input:not([type="checkbox"]),
+body.theme-bard textarea {
+    background-color: #3e3175; /* Roxo mais escuro para inputs */
+    color: #e6e6fa;
+    border-color: #dda0dd;
+}
+body.theme-bard h3 { color: #ff79c6; } /* Rosa choque para títulos */
+body.theme-bard .ability-score-name { background-color: #5a4a9f; color: #ff79c6; }
+body.theme-bard .proficiency-checkbox:checked { background-color: #e6e6fa; }
+/* Corrige a cor de labels específicas que não herdam a cor principal */
+body.theme-bard .input-group label,
+body.theme-bard .stat-box label,
+body.theme-bard .hp-max-box,
+body.theme-bard .hp-current-box label,
+body.theme-bard .hp-temp-box label,
+body.theme-bard .attacks-table th {
+    color: #c1b8f0; /* Uma lavanda clara para boa legibilidade */
+}

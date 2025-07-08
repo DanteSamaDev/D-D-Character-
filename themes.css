@@ -1,0 +1,446 @@
+/* ================================================= */
+/* === MOTOR DE TEMAS ============================== */
+/* ================================================= */
+
+/* --- TEMA: MAGO (WIZARD) --- */
+@keyframes float-runes {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+body.theme-wizard {
+    background-color: #0c1428;
+    background-image: url('https://i.imgur.com/aT3s2tG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.rune-stream {
+    position: absolute;
+    top: 100%;
+    color: rgba(0, 191, 255, 0.5);
+    animation: float-runes 15s linear infinite;
+    text-shadow: 
+        0 0 5px rgba(0, 191, 255, 0.8),
+        0 0 15px rgba(0, 191, 255, 0.6),
+        0 0 30px rgba(0, 191, 255, 0.4);
+}
+
+body.theme-wizard .character-sheet {
+    border-color: #4a5d8b;
+    background-color: #1e2a40;
+    color: #e0e5f0;
+}
+
+body.theme-wizard .left-column > *,
+body.theme-wizard .middle-column > *,
+body.theme-wizard .right-column > * {
+    background-color: #2a3950;
+    border-color: #4a5d8b;
+}
+
+body.theme-wizard input:not([type="checkbox"]),
+body.theme-wizard textarea {
+    background-color: #1a2433;
+    color: #e0e5f0;
+    border-color: #4a5d8b;
+}
+
+body.theme-wizard h3 { color: #61dafb; }
+body.theme-wizard .ability-score-name { background-color: #2a3950; color: #61dafb; }
+body.theme-wizard .proficiency-checkbox:checked { background-color: #e0e5f0; }
+body.theme-wizard .input-group label,
+body.theme-wizard .stat-box label,
+body.theme-wizard .hp-max-box,
+body.theme-wizard .hp-current-box label,
+body.theme-wizard .hp-temp-box label,
+body.theme-wizard .attacks-table th {
+    color: #a8b2c5;
+}
+
+/* --- TEMA: GUERREIRO (WARRIOR) --- */
+body.theme-warrior {
+    background-color: #2d2d2d;
+}
+
+@keyframes rise-spark {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-100vh) scale(0.5); }
+}
+
+@keyframes rise-smoke {
+    from { opacity: 0; transform: translateY(0) scale(0.8); }
+    50% { opacity: 0.35; }
+    to { opacity: 0; transform: translateY(-100vh) scale(2); }
+}
+
+.spark, .smoke-puff {
+    position: absolute;
+    bottom: -50px;
+}
+
+body.theme-warrior .character-sheet {
+    border-color: #ff4500;
+    background-color: #4a4a4a;
+    color: #f0f0f0;
+}
+
+body.theme-warrior .left-column > *,
+body.theme-warrior .middle-column > *,
+body.theme-warrior .right-column > * {
+    background-color: #5e5e5e;
+    border-color: #ff4500;
+}
+
+body.theme-warrior input:not([type="checkbox"]),
+body.theme-warrior textarea {
+    background-color: #3c3c3c;
+    color: #f0f0f0;
+    border-color: #ff4500;
+}
+body.theme-warrior h3 { color: #ff8c00; }
+body.theme-warrior .ability-score-name { background-color: #5e5e5e; color: #ff8c00; }
+body.theme-warrior .proficiency-checkbox:checked { background-color: #f0f0f0; }
+body.theme-warrior .input-group label,
+body.theme-warrior .stat-box label,
+body.theme-warrior .hp-max-box,
+body.theme-warrior .hp-current-box label,
+body.theme-warrior .hp-temp-box label,
+body.theme-warrior .attacks-table th {
+    color: #cccccc;
+}
+
+/* --- TEMA: BARDO (BARD) --- */
+@keyframes float-notes {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+    100% { transform: translate(50px, -100vh) rotate(360deg); opacity: 0; }
+}
+
+body.theme-bard {
+    background-color: #2e1a47;
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.note-stream {
+    position: absolute;
+    top: 100%;
+    color: rgba(221, 160, 221, 0.7);
+    animation: float-notes 12s linear infinite 2s;
+    text-shadow: 
+        0 0 5px rgba(255, 105, 180, 0.5),
+        0 0 10px rgba(147, 112, 219, 0.4);
+}
+
+body.theme-bard .character-sheet {
+    background-color: #483d8b;
+    border-color: #dda0dd;
+    color: #e6e6fa;
+}
+
+body.theme-bard .left-column > *,
+body.theme-bard .middle-column > *,
+body.theme-bard .right-column > * {
+    background-color: #5a4a9f;
+    border-color: #dda0dd;
+}
+
+body.theme-bard input:not([type="checkbox"]),
+body.theme-bard textarea {
+    background-color: #3e3175;
+    color: #e6e6fa;
+    border-color: #dda0dd;
+}
+body.theme-bard h3 { color: #ff79c6; }
+body.theme-bard .ability-score-name { background-color: #5a4a9f; color: #ff79c6; }
+body.theme-bard .proficiency-checkbox:checked { background-color: #e6e6fa; }
+body.theme-bard .input-group label,
+body.theme-bard .stat-box label,
+body.theme-bard .hp-max-box,
+body.theme-bard .hp-current-box label,
+body.theme-bard .hp-temp-box label,
+body.theme-bard .attacks-table th {
+    color: #c1b8f0;
+}
+
+/* --- TEMA: CLÉRIGO (CLERIC) --- */
+@keyframes fade-in-out-ray {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.5; }
+}
+
+body.theme-cleric {
+    background-color: #1e2b33;
+    background-image: url('https://i.imgur.com/Y8w2qfH.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.divine-ray {
+    position: absolute;
+    width: 2px;
+    height: 150vh;
+    background: linear-gradient(to bottom, rgba(255, 235, 150, 0.5), transparent);
+    box-shadow: 0 0 10px #fff5cc;
+    animation: fade-in-out-ray 8s ease-in-out infinite;
+}
+
+body.theme-cleric .character-sheet {
+    background-color: #3c4a54;
+    border-color: #ffd700;
+    color: #f0f8ff;
+}
+
+body.theme-cleric .left-column > *,
+body.theme-cleric .middle-column > *,
+body.theme-cleric .right-column > * {
+    background-color: #4a5c68;
+    border-color: #ffd700;
+}
+
+body.theme-cleric input:not([type="checkbox"]),
+body.theme-cleric textarea {
+    background-color: #2c3a44;
+    color: #f0f8ff;
+    border-color: #ffd700;
+}
+body.theme-cleric h3 { color: #fafad2; }
+body.theme-cleric .ability-score-name { background-color: #4a5c68; color: #fafad2; }
+body.theme-cleric .proficiency-checkbox:checked { background-color: #f0f8ff; }
+body.theme-cleric .input-group label,
+body.theme-cleric .stat-box label,
+body.theme-cleric .hp-max-box,
+body.theme-cleric .hp-current-box label,
+body.theme-cleric .hp-temp-box label,
+body.theme-cleric .attacks-table th {
+    color: #dcdcdc;
+}
+
+/* --- TEMA: LADINO (ROGUE) --- */
+@keyframes flicker-shadow {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.25; }
+}
+
+body.theme-rogue {
+    background-color: #1a1a1a;
+    background-image: 
+        linear-gradient(rgba(50, 50, 50, 0.6), rgba(50, 50, 50, 0.6)),
+        url('https://i.imgur.com/3hH0wED.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.flickering-shadow {
+    position: absolute;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    filter: blur(15px);
+    animation: flicker-shadow 8s ease-in-out infinite;
+}
+
+body.theme-rogue .character-sheet {
+    background-color: #2b2b2b;
+    border-color: #8b0000;
+    color: #c0c0c0;
+}
+
+body.theme-rogue .left-column > *,
+body.theme-rogue .middle-column > *,
+body.theme-rogue .right-column > * {
+    background-color: #3c3c3c;
+    border-color: #8b0000;
+}
+
+body.theme-rogue input:not([type="checkbox"]),
+body.theme-rogue textarea {
+    background-color: #252525;
+    color: #c0c0c0;
+    border-color: #8b0000;
+}
+body.theme-rogue h3 { color: #dc143c; }
+body.theme-rogue .ability-score-name { background-color: #3c3c3c; color: #dc143c; }
+body.theme-rogue .proficiency-checkbox:checked { background-color: #c0c0c0; }
+body.theme-rogue .input-group label,
+body.theme-rogue .stat-box label,
+body.theme-rogue .hp-max-box,
+body.theme-rogue .hp-current-box label,
+body.theme-rogue .hp-temp-box label,
+body.theme-rogue .attacks-table th {
+    color: #a9a9a9;
+}
+
+/* --- TEMA: DRUIDA (DRUID) --- */
+@keyframes rise-vine {
+    from { height: 0%; }
+    to { height: 100%; }
+}
+
+body.theme-druid {
+    background-color: #1a2a1a;
+    background-image: url('https://i.imgur.com/6g3pSPK.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.vine {
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to top, #4a2e1a, #2e8b57);
+    border-radius: 5px;
+    box-shadow: 0 0 5px #556b2f;
+    animation: rise-vine 15s linear infinite;
+}
+
+body.theme-druid .character-sheet {
+    background-color: #2f4f4f;
+    border-color: #8fbc8f;
+    color: #f5f5dc;
+}
+
+body.theme-druid .left-column > *,
+body.theme-druid .middle-column > *,
+body.theme-druid .right-column > * {
+    background-color: #3a5a5a;
+    border-color: #8fbc8f;
+}
+
+body.theme-druid input:not([type="checkbox"]),
+body.theme-druid textarea {
+    background-color: #2a3f3f;
+    color: #f5f5dc;
+    border-color: #8fbc8f;
+}
+body.theme-druid h3 { color: #98fb98; }
+body.theme-druid .ability-score-name { background-color: #3a5a5a; color: #98fb98; }
+body.theme-druid .proficiency-checkbox:checked { background-color: #f5f5dc; }
+body.theme-druid .input-group label,
+body.theme-druid .stat-box label,
+body.theme-druid .hp-max-box,
+body.theme-druid .hp-current-box label,
+body.theme-druid .hp-temp-box label,
+body.theme-druid .attacks-table th {
+    color: #d2b48c;
+}
+
+/* --- TEMA: PALADINO (PALADIN) --- */
+@keyframes slow-fade-blessing {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.6; }
+}
+
+body.theme-paladin {
+    background-color: #e6f7ff;
+    background-image: url('https://i.imgur.com/t8d9Yyq.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.blessing-beam {
+    position: absolute;
+    width: 15vw;
+    min-width: 100px;
+    height: 150vh;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(135, 206, 250, 0.3), transparent);
+    box-shadow: 0 0 15px #ffffff, 0 0 30px #ffd700;
+    filter: blur(5px);
+    animation: slow-fade-blessing 12s ease-in-out infinite;
+}
+
+body.theme-paladin .character-sheet {
+    background-color: #f0f8ff;
+    border-color: #ffd700;
+    color: #003366;
+}
+
+body.theme-paladin .left-column > *,
+body.theme-paladin .middle-column > *,
+body.theme-paladin .right-column > * {
+    background-color: #ffffff;
+    border-color: #b0c4de;
+}
+
+body.theme-paladin input:not([type="checkbox"]),
+body.theme-paladin textarea {
+    background-color: #e6f0ff;
+    color: #003366;
+    border-color: #b0c4de;
+}
+body.theme-paladin h3 { color: #4682b4; }
+body.theme-paladin .ability-score-name { background-color: #ffffff; color: #4682b4; }
+body.theme-paladin .proficiency-checkbox:checked { background-color: #003366; }
+body.theme-paladin .input-group label,
+body.theme-paladin .stat-box label,
+body.theme-paladin .hp-max-box,
+body.theme-paladin .hp-current-box label,
+body.theme-paladin .hp-temp-box label,
+body.theme-paladin .attacks-table th {
+    color: #708090;
+}
+
+/* --- TEMA: BRUXO (WARLOCK) --- */
+@keyframes pulse-eldritch {
+    0%, 100% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+body.theme-warlock {
+    background-color: #0d021a;
+    background-image: url('https://i.imgur.com/xXG1s4v.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.eldritch-pulse {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(124, 252, 0, 0.5) 0%, rgba(75, 0, 130, 0) 70%);
+    filter: blur(10px);
+    animation: pulse-eldritch 8s ease-in-out infinite;
+}
+
+body.theme-warlock .character-sheet {
+    background-color: #1a1129;
+    border-color: #7cfc00;
+    color: #e0c6ff;
+}
+
+body.theme-warlock .left-column > *,
+body.theme-warlock .middle-column > *,
+body.theme-warlock .right-column > * {
+    background-color: #2c1d42;
+    border-color: #7cfc00;
+}
+
+body.theme-warlock input:not([type="checkbox"]),
+body.theme-warlock textarea {
+    background-color: #1f152e;
+    color: #e0c6ff;
+    border-color: #7cfc00;
+}
+body.theme-warlock h3 { color: #9400d3; }
+body.theme-warlock .ability-score-name { background-color: #2c1d42; color: #9400d3; }
+body.theme-warlock .proficiency-checkbox:checked { background-color: #e0c6ff; }
+body.theme-warlock .input-group label,
+body.theme-warlock .stat-box label,
+body.theme-warlock .hp-max-box,
+body.theme-warlock .hp-current-box label,
+body.theme-warlock .hp-temp-box label,
+body.theme-warlock .attacks-table th {
+    color: #b19cd9;
+}

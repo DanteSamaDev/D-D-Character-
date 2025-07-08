@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Personagem D&D 5e</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="themes.css">
+</head>
+<body>
+    <div id="animation-container"></div>
+
+    <div class="theme-selector">
+        <span>Escolha um Tema:</span>
+        <div id="class-selection-grid">
+            <div class="class-icon-button" data-class="warrior" title="Guerreiro">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/sword.png" alt="Ícone de Guerreiro">
+            </div>
+            <div class="class-icon-button" data-class="wizard" title="Mago">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/spell-book.png" alt="Ícone de Mago">
+            </div>
+            <div class="class-icon-button" data-class="bard" title="Bardo">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/lyre.png" alt="Ícone de Bardo">
+            </div>
+            <div class="class-icon-button" data-class="cleric" title="Clérigo">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/ankh.png" alt="Ícone de Clérigo">
+            </div>
+            <div class="class-icon-button" data-class="rogue" title="Ladino">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/anonymous-mask.png" alt="Ícone de Ladino">
+            </div>
+            <div class="class-icon-button" data-class="druid" title="Druida">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/wolf-head.png" alt="Ícone de Druida">
+            </div>
+            <div class="class-icon-button" data-class="paladin" title="Paladino">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/knight-helmet.png" alt="Ícone de Paladino">
+            </div>
+            <div class="class-icon-button" data-class="warlock" title="Bruxo">
+                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/pentagram.png" alt="Ícone de Bruxo">
+            </div>
+            <!-- Adicione mais classes aqui no futuro -->
+        </div>
+    </div>
+
+    <div class="character-sheet">
+        <div class="sheet-header">
+            <div class="header-row header-name-class">
+                <div class="input-group large-text">
+                    <input type="text" id="character-name" value="NOME DO PERSONAGEM">
+                    <label for="character-name">Nome do Personagem</label>
+                </div>
+                <div class="input-group class-level-group">
+                    <input type="text" id="class-name" value="Guerreiro" readonly>
+                    <input type="number" id="character-level" value="3">
+                    <label for="class-level">Classe & Nível</label>
+                </div>
+            </div>
+
+            <div class="header-row">
+                <div class="input-group">
+                    <input type="text" id="background" value="Acolyte">
+                    <label for="background">Antecedente</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="player-name" value="Seu Nome">
+                    <label for="player-name">Nome do Jogador</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="race" value="Humano">
+                    <label for="race">Raça</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="alignment" value="Leal e Bom">
+                    <label for="alignment">Tendência</label>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="experience-points" value="900">
+                    <label for="experience-points">Pontos de Experiência</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sheet-main-content">
+            <div class="left-column">
+                    <div class="inspiration-prof-box">
+                        <div class="inspiration-box">
+                            <input type="checkbox" id="inspiration">
+                            <span>Inspiração</span>
+                        </div>
+                        <div class="proficiency-bonus-box">
+                            <input type="text" id="proficiency-bonus" value="+2" readonly>
+                            <label for="proficiency-bonus">Bônus de Proficiência</label>
+                        </div>
+                    </div>
+
+                    <section class="abilities-block">
+                        <h3>Atributos</h3>
+                        <div class="abilities-scores-grid">
+                            <div class="ability-score-group" data-ability="str">
+                                <span class="ability-score-name">FOR</span>
+                                <input type="number" id="str-score" class="ability-score-input" value="15">
+                                <input type="text" id="str-mod" class="ability-modifier-box" value="+2" readonly>
+                            </div>
+                            <div class="ability-score-group" data-ability="dex">
+                                <span class="ability-score-name">DES</span>
+                                <input type="number" id="dex-score" class="ability-score-input" value="14">
+                                <input type="text" id="dex-mod" class="ability-modifier-box" value="+2" readonly>
+                            </div>
+                            <div class="ability-score-group" data-ability="con">
+                                <span class="ability-score-name">CON</span>
+                                <input type="number" id="con-score" class="ability-score-input" value="13">
+                                <input type="text" id="con-mod" class="ability-modifier-box" value="+1" readonly>
+                            </div>
+                            <div class="ability-score-group" data-ability="int">
+                                <span class="ability-score-name">INT</span>
+                                <input type="number" id="int-score" class="ability-score-input" value="12">
+                                <input type="text" id="int-mod" class="ability-modifier-box" value="+1" readonly>
+                            </div>
+                            <div class="ability-score-group" data-ability="wis">
+                                <span class="ability-score-name">SAB</span>
+                                <input type="number" id="wis-score" class="ability-score-input" value="10">
+                                <input type="text" id="wis-mod" class="ability-modifier-box" value="+0" readonly>
+                            </div>
+                            <div class="ability-score-group" data-ability="cha">
+                                <span class="ability-score-name">CAR</span>
+                                <input type="number" id="cha-score" class="ability-score-input" value="8">
+                                <input type="text" id="cha-mod" class="ability-modifier-box" value="-1" readonly>
+                            </div>
+                        </div>
+                    </section>
+
+                <section class="saving-throws-block">
+                    <h3>Testes de Resistência</h3>
+                    <ul class="saving-throws-list">
+                        <li data-ability="str">
+                            <input type="checkbox" id="save-str" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="+2" readonly>
+                            <label for="save-str">Força</label>
+                        </li>
+                        <li data-ability="dex">
+                            <input type="checkbox" id="save-dex" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="+2" readonly>
+                            <label for="save-dex">Destreza</label>
+                        </li>
+                        <li data-ability="con">
+                            <input type="checkbox" id="save-con" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="+1" readonly>
+                            <label for="save-con">Constituição</label>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="save-int" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="+1" readonly>
+                            <label for="save-int">Inteligência</label>
+                        </li>
+                        <li data-ability="wis">
+                            <input type="checkbox" id="save-wis" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="+0" readonly>
+                            <label for="save-wis">Sabedoria</label>
+                        </li>
+                        <li data-ability="cha">
+                            <input type="checkbox" id="save-cha" class="proficiency-checkbox">                            
+                            <input type="text" class="save-value" value="-1" readonly>
+                            <label for="save-cha">Carisma</label>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="skills-block">
+                    <h3>Perícias</h3>
+                    <ul class="skills-list">
+                        <li data-ability="dex">
+                            <input type="checkbox" id="skill-acrobatics" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+2" readonly>
+                            <label for="skill-acrobatics">Acrobacia</label>
+                            <span class="skill-ability">(Des)</span>
+                        </li>
+                        <li data-ability="wis">
+                            <input type="checkbox" id="skill-animal" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+0" readonly>
+                            <label for="skill-animal">Adestrar Animais</label>
+                            <span class="skill-ability">(Sab)</span>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="skill-arcana" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+1" readonly>
+                            <label for="skill-arcana">Arcanismo</label>
+                            <span class="skill-ability">(Int)</span>
+                        </li>
+                        <li data-ability="str">
+                            <input type="checkbox" id="skill-athletics" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+2" readonly>
+                            <label for="skill-athletics">Atletismo</label>
+                            <span class="skill-ability">(For)</span>
+                        </li>
+                        <li data-ability="cha">
+                            <input type="checkbox" id="skill-deception" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="-1" readonly>
+                            <label for="skill-deception">Enganação</label>
+                            <span class="skill-ability">(Car)</span>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="skill-history" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+1" readonly>
+                            <label for="skill-history">História</label>
+                            <span class="skill-ability">(Int)</span>
+                        </li>
+                        <li data-ability="wis">
+                            <input type="checkbox" id="skill-insight" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+0" readonly>
+                            <label for="skill-insight">Intuição</label>
+                            <span class="skill-ability">(Sab)</span>
+                        </li>
+                        <li data-ability="cha">
+                            <input type="checkbox" id="skill-intimidation" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="-1" readonly>
+                            <label for="skill-intimidation">Intimidação</label>
+                            <span class="skill-ability">(Car)</span>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="skill-investigation" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+1" readonly>
+                            <label for="skill-investigation">Investigação</label>
+                            <span class="skill-ability">(Int)</span>
+                        </li>
+                        <li data-ability="wis">
+                            <input type="checkbox" id="skill-medicine" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+0" readonly>
+                            <label for="skill-medicine">Medicina</label>
+                            <span class="skill-ability">(Sab)</span>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="skill-nature" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+1" readonly>
+                            <label for="skill-nature">Natureza</label>
+                            <span class="skill-ability">(Int)</span>
+                        </li>
+                        <li data-ability="wis" id="perception-skill-li">
+                            <input type="checkbox" id="skill-perception" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+0" readonly>
+                            <label for="skill-perception">Percepção</label>
+                            <span class="skill-ability">(Sab)</span>
+                        </li>
+                        <li data-ability="cha">
+                            <input type="checkbox" id="skill-performance" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="-1" readonly>
+                            <label for="skill-performance">Atuação</label>
+                            <span class="skill-ability">(Car)</span>
+                        </li>
+                        <li data-ability="cha">
+                            <input type="checkbox" id="skill-persuasion" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="-1" readonly>
+                            <label for="skill-persuasion">Persuasão</label>
+                            <span class="skill-ability">(Car)</span>
+                        </li>
+                        <li data-ability="int">
+                            <input type="checkbox" id="skill-religion" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+1" readonly>
+                            <label for="skill-religion">Religião</label>
+                            <span class="skill-ability">(Int)</span>
+                        </li>
+                        <li data-ability="dex">
+                            <input type="checkbox" id="skill-sleight" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+2" readonly>
+                            <label for="skill-sleight">Prestidigitação</label>
+                            <span class="skill-ability">(Des)</span>
+                        </li>
+                        <li data-ability="dex">
+                            <input type="checkbox" id="skill-stealth" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+2" readonly>
+                            <label for="skill-stealth">Furtividade</label>
+                            <span class="skill-ability">(Des)</span>
+                        </li>
+                        <li data-ability="wis">
+                            <input type="checkbox" id="skill-survival" class="proficiency-checkbox">
+                            <input type="text" class="skill-value" value="+0" readonly>
+                            <label for="skill-survival">Sobrevivência</label>
+                            <span class="skill-ability">(Sab)</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="passive-perception-box">
+                    <input type="number" id="passive-perception" value="10" readonly>
+                    <label for="passive-perception">Percepção Passiva (Sabedoria)</label>
+                </section>
+
+                <section class="other-proficiencies-block">
+                    <h3>Outras Proficiências e Idiomas</h3>
+                    <textarea id="other-proficiencies"></textarea>
+                </section>
+            </div>
+
+            <div class="middle-column">
+                <div class="combat-stats">
+                    <div class="stat-box">
+                        <input type="number" id="armor-class" value="18">
+                        <label for="armor-class">CA</label>
+                    </div>
+                    <div class="stat-box">
+                        <input type="text" id="initiative" value="+2" readonly>
+                        <label for="initiative">Iniciativa</label>
+                    </div>
+                    <div class="stat-box">
+                        <input type="number" id="speed" value="30">
+                        <label for="speed">Desloc</label>
+                    </div>
+                </div>
+
+                <div class="hit-points-block">
+                    <div class="hp-max-box">
+                        <span>Pontos de Vida Máximos</span>
+                        <input type="number" id="hp-maximum" value="25">
+                    </div>
+                    <div class="hp-current-box">
+                        <input type="number" id="current-hp" value="25">
+                        <label for="current-hp">Pontos de Vida Atuais</label>
+                    </div>
+                    <div class="hp-temp-box">
+                        <input type="number" id="temporary-hp" value="0">
+                        <label for="temporary-hp">Pontos de Vida Temporários</label>
+                    </div>
+                </div>
+
+                <div class="hit-dice-block">
+                    <h3>Dados de Vida</h3>
+                    <div class="hit-dice-total">
+                        <span>Total</span>
+                        <input type="text" id="hit-dice-total" value="3d8">
+                    </div>
+                    <input type="text" id="hit-dice-remaining" value="3d8">
+                </div>
+
+                <div class="death-saves-block">
+                    <h3>Testes Contra a Morte</h3>
+                    <div class="death-saves-row">
+                        <span>Sucessos</span>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="death-success-1"><input type="checkbox" id="death-success-2"><input type="checkbox" id="death-success-3">
+                        </div>
+                    </div>
+                    <div class="death-saves-row">
+                        <span>Falhas</span>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="death-failure-1"><input type="checkbox" id="death-failure-2"><input type="checkbox" id="death-failure-3">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="attacks-spellcasting-block">
+                    <h3>Ataques & Magias</h3>
+                    <div class="api-search-box">
+                        <input type="text" id="spell-search-input" placeholder="Buscar magia (em inglês)...">
+                        <button id="spell-search-button">Buscar</button>
+                    </div>
+
+                    <table class="attacks-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Bônus</th>
+                                <th>Dano/Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" id="attack-name-1" value="Espada Longa"></td>
+                                <td><input type="text" id="attack-bonus-1" value="+4"></td>
+                                <td><input type="text" id="attack-damage-1" value="1d8+2 Cortante"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="attack-name-2"></td>
+                                <td><input type="text" id="attack-bonus-2"></td>
+                                <td><input type="text" id="attack-damage-2"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="attack-name-3"></td>
+                                <td><input type="text" id="attack-bonus-3"></td>
+                                <td><input type="text" id="attack-damage-3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <textarea id="attacks-notes" placeholder="Outras notas de ataque ou descrições de magias..."></textarea>
+                </div>
+
+                <div class="equipment-block">
+                    <h3>Equipamento</h3>
+                    <textarea id="equipment"></textarea>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="personality-block">
+                    <h3>Traços de Personalidade</h3>
+                    <textarea id="personality-traits"></textarea>
+                </div>
+                <div class="ideals-block">
+                    <h3>Ideais</h3>
+                    <textarea id="ideals"></textarea>
+                </div>
+                <div class="bonds-block">
+                    <h3>Vínculos</h3>
+                    <textarea id="bonds"></textarea>
+                </div>
+                <div class="flaws-block">
+                    <h3>Defeitos</h3>
+                    <textarea id="flaws"></textarea>
+                </div>
+                <div class="features-traits-block">
+                    <h3>Características & Traços</h3>
+                    <textarea id="features-traits"></textarea>
+                </div>
+
+                <div class="spellcasting-block" data-class-feature="spellcasting">
+                    <h3>Magias de Mago</h3>
+                    <div class="spell-stats-grid">
+                        <div class="spell-stat">
+                            <input type="text" id="spellcasting-ability" value="Inteligência" readonly>
+                            <label>Atributo de Conjuração</label>
+                        </div>
+                        <div class="spell-stat">
+                            <input type="text" id="spell-save-dc" value="13" readonly>
+                            <label>CD do Teste de Magia</label>
+                        </div>
+                        <div class="spell-stat">
+                            <input type="text" id="spell-attack-bonus" value="+5" readonly>
+                            <label>Bônus de Ataque com Magia</label>
+                        </div>
+                    </div>
+
+                    <div class="spellbook-container">
+                        <div class="spell-level-section">
+                            <h4>Truques</h4>
+                            <ul id="spell-list-level-0" class="spell-list"></ul>
+                        </div>
+                        <!-- Repetir para os níveis 1 a 9 -->
+                        <div class="spell-level-section">
+                            <div class="spell-level-header">
+                                <h4>Nível 1</h4>
+                                <div class="spell-slots-tracker">
+                                    <label>Espaços:</label>
+                                    <input type="number" id="spell-slots-total-1" value="4">
+                                    <span>/</span>
+                                    <input type="number" id="spell-slots-used-1" value="0">
+                                </div>
+                            </div>
+                            <ul id="spell-list-level-1" class="spell-list"></ul>
+                        </div>
+                        <!-- Adicione mais seções para os níveis 2-9 conforme necessário -->
+                    </div>
+                </div>
+
+                <div class="character-portrait-block">
+                    <h3>Retrato do Personagem</h3>
+                    <!-- A label torna a imagem clicável, ativando o input escondido -->
+                    <label for="portrait-upload">
+                        <img id="character-portrait-img" src="https://via.placeholder.com/200x250.png?text=Retrato" alt="Retrato do Personagem">
+                    </label>
+                    <input type="file" id="portrait-upload" accept="image/png, image/jpeg, image/gif">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal (Pop-up) para Detalhes da Magia -->
+    <div id="spell-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close-button" class="modal-close-button">&times;</button>
+            <div id="spell-modal-body">
+                <!-- Conteúdo da magia será inserido aqui pelo JavaScript -->
+            </div>
+            <button id="add-spell-to-book-button" class="modal-add-button">Adicionar ao Grimório</button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
