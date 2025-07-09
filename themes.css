@@ -10,7 +10,6 @@
 
 body.theme-wizard {
     background-color: #0c1428;
-    background-image: url('https://i.imgur.com/aT3s2tG.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -174,7 +173,6 @@ body.theme-bard .attacks-table th {
 
 body.theme-cleric {
     background-color: #1e2b33;
-    background-image: url('https://i.imgur.com/Y8w2qfH.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -229,8 +227,7 @@ body.theme-cleric .attacks-table th {
 body.theme-rogue {
     background-color: #1a1a1a;
     background-image: 
-        linear-gradient(rgba(50, 50, 50, 0.6), rgba(50, 50, 50, 0.6)),
-        url('https://i.imgur.com/3hH0wED.jpg');
+        linear-gradient(rgba(50, 50, 50, 0.6), rgba(50, 50, 50, 0.6));
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -283,7 +280,6 @@ body.theme-rogue .attacks-table th {
 
 body.theme-druid {
     background-color: #1a2a1a;
-    background-image: url('https://i.imgur.com/6g3pSPK.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -338,7 +334,6 @@ body.theme-druid .attacks-table th {
 
 body.theme-paladin {
     background-color: #e6f7ff;
-    background-image: url('https://i.imgur.com/t8d9Yyq.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -400,7 +395,6 @@ body.theme-paladin .attacks-table th {
 
 body.theme-warlock {
     background-color: #0d021a;
-    background-image: url('https://i.imgur.com/xXG1s4v.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
