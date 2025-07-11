@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Adiciona o ícone (favicon) na aba do navegador -->
+    <link rel="icon" type="image/png" href="src/images/icons/favicon.png">
     <title>Ficha de Personagem D&D 5e</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="themes.css">
@@ -13,29 +15,32 @@
     <div class="theme-selector">
         <span>Escolha um Tema:</span>
         <div id="class-selection-grid">
+            <div class="class-icon-button" data-class="neutral" title="Neutro">
+                <img src="src/images/icons/neutro.png" alt="Ícone Neutro">
+            </div>
             <div class="class-icon-button" data-class="warrior" title="Guerreiro">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/sword.png" alt="Ícone de Guerreiro">
+                <img src="src/images/icons/guerreiro.png" alt="Ícone de Guerreiro">
             </div>
             <div class="class-icon-button" data-class="wizard" title="Mago">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/spell-book.png" alt="Ícone de Mago">
+                <img src="src/images/icons/mago.png" alt="Ícone de Mago">
             </div>
             <div class="class-icon-button" data-class="bard" title="Bardo">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/lyre.png" alt="Ícone de Bardo">
+                <img src="src/images/icons/bardo.png" alt="Ícone de Bardo">
             </div>
             <div class="class-icon-button" data-class="cleric" title="Clérigo">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/ankh.png" alt="Ícone de Clérigo">
+                <img src="src/images/icons/clerigo.png" alt="Ícone de Clérigo">
             </div>
             <div class="class-icon-button" data-class="rogue" title="Ladino">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/anonymous-mask.png" alt="Ícone de Ladino">
+                <img src="src/images/icons/ladino.png" alt="Ícone de Ladino">
             </div>
             <div class="class-icon-button" data-class="druid" title="Druida">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/wolf-head.png" alt="Ícone de Druida">
+                <img src="src/images/icons/druida.png" alt="Ícone de Druida">
             </div>
             <div class="class-icon-button" data-class="paladin" title="Paladino">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/knight-helmet.png" alt="Ícone de Paladino">
+                <img src="src/images/icons/paladino.png" alt="Ícone de Paladino">
             </div>
             <div class="class-icon-button" data-class="warlock" title="Bruxo">
-                <img src="https://img.icons8.com/ios-glyphs/100/8b7d6b/pentagram.png" alt="Ícone de Bruxo">
+                <img src="src/images/icons/bruxo.png" alt="Ícone de Bruxo">
             </div>
             <!-- Adicione mais classes aqui no futuro -->
         </div>
@@ -452,13 +457,29 @@
                     <h3>Retrato do Personagem</h3>
                     <!-- A label torna a imagem clicável, ativando o input escondido -->
                     <label for="portrait-upload">
-                        <img id="character-portrait-img" src="https://via.placeholder.com/200x250.png?text=Retrato" alt="Retrato do Personagem">
+                        <img id="character-portrait-img" src="src/images/portraits/placeholder.png" alt="Retrato do Personagem">
                     </label>
                     <input type="file" id="portrait-upload" accept="image/png, image/jpeg, image/gif">
+                    <div class="portrait-buttons">
+                        <button id="change-portrait-button" class="portrait-button">Trocar Foto</button>
+                        <button id="remove-portrait-button" class="portrait-button remove">Remover</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <p>Ficha de Personagem Interativa para D&D 5e. Sinta-se à vontade para usar e customizar.</p>
+        <p class="icon-credits">
+            Ícones por <a href="https://www.flaticon.com/br/icones-gratis/rpg" title="rpg ícones" target="_blank" rel="noopener noreferrer">Iconic Artisan</a>, 
+            <a href="https://www.flaticon.com/br/icones-gratis/espada" title="espada ícones" target="_blank" rel="noopener noreferrer">Freepik</a>, 
+            <a href="https://www.flaticon.com/br/icones-gratis/harpa" title="harpa ícones" target="_blank" rel="noopener noreferrer">Triangle Squad</a>, 
+            <a href="https://www.flaticon.com/br/icones-gratis/jogos" title="jogos ícones" target="_blank" rel="noopener noreferrer">Smashicons</a>, 
+            <a href="https://www.flaticon.com/br/icones-gratis/paladino" title="paladino ícones" target="_blank" rel="noopener noreferrer">Leremy</a>, e 
+            <a href="https://www.flaticon.com/br/icones-gratis/bola-de-cristal" title="bola de cristal ícones" target="_blank" rel="noopener noreferrer">fjstudio</a> via Flaticon.
+        </p>
+    </footer>
 
     <!-- Modal (Pop-up) para Detalhes da Magia -->
     <div id="spell-modal" class="modal-overlay">

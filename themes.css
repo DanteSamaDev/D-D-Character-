@@ -438,3 +438,62 @@ body.theme-warlock .hp-temp-box label,
 body.theme-warlock .attacks-table th {
     color: #b19cd9;
 }
+
+/* ================================================= */
+/* === ESTILOS DO RODAPÉ PARA CADA TEMA ========== */
+/* ================================================= */
+
+body.theme-wizard .site-footer { color: #a8b2c5; border-top-color: #4a5d8b; }
+body.theme-wizard .site-footer a { color: #c0c8d9; }
+
+body.theme-warrior .site-footer { color: #cccccc; border-top-color: #777; }
+body.theme-warrior .site-footer a { color: #e0e0e0; }
+
+body.theme-bard .site-footer { color: #c1b8f0; border-top-color: #5a4a9f; }
+body.theme-bard .site-footer a { color: #d8d2ff; }
+
+body.theme-cleric .site-footer { color: #dcdcdc; border-top-color: #4a5c68; }
+body.theme-cleric .site-footer a { color: #f0f8ff; }
+
+body.theme-rogue .site-footer { color: #a9a9a9; border-top-color: #3c3c3c; }
+body.theme-rogue .site-footer a { color: #c0c0c0; }
+
+body.theme-druid .site-footer { color: #d2b48c; border-top-color: #3a5a5a; }
+body.theme-druid .site-footer a { color: #eaddc5; }
+
+body.theme-paladin .site-footer { color: #708090; border-top-color: #d1e0f1; }
+body.theme-paladin .site-footer a { color: #506070; }
+
+body.theme-warlock .site-footer { color: #b19cd9; border-top-color: #2c1d42; }
+body.theme-warlock .site-footer a { color: #cbb6e8; }
+
+/* ================================================= */
+/* === ESTILOS DOS BOTÕES DO RETRATO PARA TEMAS ==== */
+/* ================================================= */
+
+/* Estilo para o botão "Trocar Foto" em temas escuros */
+body.theme-wizard .portrait-button,
+body.theme-warrior .portrait-button,
+body.theme-bard .portrait-button,
+body.theme-cleric .portrait-button,
+body.theme-rogue .portrait-button,
+body.theme-druid .portrait-button,
+body.theme-warlock .portrait-button {
+    background-color: #4a4a4a;
+    border-color: #6a6a6a;
+    color: #e0e0e0;
+}
+body.theme-wizard .portrait-button:hover,
+body.theme-warrior .portrait-button:hover,
+body.theme-bard .portrait-button:hover,
+body.theme-cleric .portrait-button:hover,
+body.theme-rogue .portrait-button:hover,
+body.theme-druid .portrait-button:hover,
+body.theme-warlock .portrait-button:hover {
+    background-color: #5a5a5a;
+}
+
+/* O botão de remover usa a cor de destaque, então só ajustamos o hover */
+body[class*="theme-"] .portrait-button.remove:hover {
+    filter: brightness(0.85);
+}
